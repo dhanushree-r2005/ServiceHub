@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Management</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        :root {
+            --primary-color: #007bff; /* Primary color for buttons */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #eceffc; /* Light background */
+            margin: 0; /* Reset margin */
+        }
+
+        .container {
+            display: flex; /* Flexbox for vertical split */
+            gap: 20px; /* Space between the two forms */
+            width: 100%; /* Full width */
+            max-width: 1200px; /* Max width for the container */
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center elements horizontally */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+            width: 100%; /* Take full width */
+            max-width: 400px; /* Set a max width for the forms */
+            background: rgba(0, 0, 0, 0.8); /* Dark background for form */
+            color: white; /* White text */
+        }
+		h1
+		{
+			color:#00000;
+		}
+
+        h2 {
+            color: #fff; /* White color for headers */
+            margin: 0; /* Reset margin */
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #fff; /* White for labels */
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 2px solid #007bff; /* Blue border */
+            border-radius: 5px;
+            background-color: transparent; /* Transparent background for inputs */
+            color: white; /* White text */
+            transition: border-color 0.3s ease; /* Smooth border color transition */
+        }
+
+        input:focus, select:focus {
+            border-color: #0056b3; /* Darker blue on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #007bff; /* Blue background */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth background transition */
+            position: relative; /* For the before pseudo-element */
+            overflow: hidden; /* To hide the overflow */
+        }
+
+        button::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+              120deg,
+              transparent,
+              var(--primary-color),
+              transparent
+            );
+            transform: translateX(-100%); /* Start off-screen */
+            transition: transform 0.6s; /* Smooth animation for the background */
+        }
+
+        button:hover {
+            background: transparent; /* Transparent on hover */
+            box-shadow: 0 0 20px 10px hsla(204, 70%, 53%, 0.5);
+        }
+
+        button:hover::before {
+            transform: translateX(100%); /* Move background across on hover */
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px; /* Wider popup */
+            margin: auto;
+            animation: fadeIn 0.3s; /* Popup fade-in animation */
+        }
+
+        .close {
+            color: red;
+            float: right;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: darkred; /* Change color on hover */
+        }
+
+        /* Animation for popup */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Sprinkling effect */
+        @keyframes sprinkle {
+            0% { transform: translateY(-100%); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Service Management</h1>
+    
+    <div class="container">
+        <!-- Register New Work Section -->
+        <div class="form-container">
+            <h2>Register a New Work</h2>
+            <form id="newWorkForm">
+                <label for="service">Select Service:</label>
+                <select id="service" name="service" required>
+                    <option value="1">Carpentry</option>
+                    <option value="2">Plumbing</option>
+                    <option value="3">Electrical Work</option>
+                    <option value="4">Painting</option>
+                    <option value="5">Moving Services</option>
+                </select>
+                
+                <label for="preferred_date">Preferred Date:</label>
+                <input type="date" id="preferred_date" name="preferred_date" required>
+                
+                <label for="preferred_time">Preferred Time:</label>
+                <input type="time" id="preferred_time" name="preferred_time" required>
+                
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required placeholder="Enter your full address">
+                
+                <label for="location">Location (Coordinates):</label>
+                <input type="text" id="location" name="location" placeholder="Enter coordinates (lat,long)" required>
+                
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" name="mobile" required pattern="^\d{10}$" placeholder="Enter a 10-digit mobile number">
+                
+                <button type="submit">Submit Request</button>
+            </form>
+        </div>
+
+        <!-- Check Status Section -->
+        <div class="form-container">
+            <h2>Check Service Status</h2>
+            <form id="checkStatusForm">
+                <label for="request_id">Enter Request ID:</label>
+                <input type="text" id="request_id" name="request_id" required>
+                <button type="submit">Check Status</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popup for displaying worker details -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close">&times;</span>
+            <p id="popupMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('newWorkForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('submit_service_request.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showPopup(`Request submitted successfully! Your Request ID is: ${data.request_id}`);
+                    sprinkleEffect(); // Trigger the sprinkling effect
+                } else {
+                    showPopup(`Error: ${data.message}`);
+                }
+            })
+            .catch(error => {
+                showPopup('An error occurred. Please try again.');
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById('checkStatusForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const requestId = document.getElementById('request_id').value;
+
+            fetch('check_status.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `request_id=${requestId}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                showPopup(data); // Display the returned data in the popup
+            })
+            .catch(error => {
+                showPopup('An error occurred while checking the status.');
+                console.error('Error:', error);
+            });
+        });
+
+        function showPopup(message) {
+            const popup = document.getElementById('popup');
+            const popupMessage = document.getElementById('popupMessage');
+            const closeBtn = document.querySelector('.close');
+
+            popupMessage.innerHTML = message; // Use innerHTML for displaying HTML content
+            popup.style.display = 'block';
+
+            closeBtn.onclick = function() {
+                popup.style.display = 'none';
+            };
+
+            window.onclick = function(event) {
+                if (event.target == popup) {
+                    popup.style.display = 'none';
+               
+                }
+            };
+        }
+
+        function sprinkleEffect() {
+            const sprinkleContainer = document.createElement('div');
+            sprinkleContainer.classList.add('sprinkle');
+
+            // Create multiple sprinkle elements
+            for (let i = 0; i < 30; i++) {
+                const sprinkle = document.createElement('div');
+                sprinkle.className = 'sprinkle-effect';
+                sprinkle.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                sprinkle.style.animationDuration = (Math.random() * 1 + 0.5) + 's'; // Random duration
+                sprinkleContainer.appendChild(sprinkle);
+            }
+
+            document.body.appendChild(sprinkleContainer);
+
+            // Remove sprinkle container after animation
+            setTimeout(() => {
+                document.body.removeChild(sprinkleContainer);
+            }, 2000); // Adjust duration as needed
+        }
+    </script>
+
+    <style>
+        /* Sprinkling effect styles */
+        .sprinkle {
+            position: fixed;
+            top: 10%; /* Start from the top */
+            pointer-events: none; /* Ignore mouse events */
+            width: 100%; /* Full width */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .sprinkle-effect {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8); /* White sprinkles */
+            border-radius: 50%; /* Make them round */
+            animation: sprinkleDown 1s forwards; /* Animation */
+        }
+
+        @keyframes sprinkleDown {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(200px); /* Move down */
+                opacity: 0; /* Fade out */
+            }
+        }
+    </style>
+</body>
+</html>

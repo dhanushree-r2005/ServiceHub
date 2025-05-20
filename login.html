@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ServiceHub</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <video autoplay muted loop id="backgroundVideo">
+		<source src="video/playback.mp4" type="video/mp4">
+	</video>
+	<div class="container">
+        <div class="login-box">
+            <h2 id="formTitle">Login</h2>
+			<h2 id="HOME2"><a href="index.html" class="HOME2">HOME</a></h2>
+
+            <div class="login-options">
+                <button class="login-btn" onclick="showLoginForm('user')">User Login</button>
+                <button class="login-btn" onclick="showLoginForm('worker')">Worker Login</button>
+                <button class="login-btn" onclick="showLoginForm('manager')">Manager Login</button>
+				<button class="login-btn" onclick="showLoginForm('Sign up')"><a href="signup.html" class="signup-link">Sign Up</a></button>
+            </div>
+            <div class="login-form" id="loginForm">
+                <form action="login.php" method="post">
+                    <input type="hidden" name="role" id="role" value="">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <button type="submit" class="submit-btn">Login</button>
+                </form>
+            </div>
+        </div>
+        <span style="--i:0;"></span>
+        <span style="--i:1;"></span>
+        <span style="--i:2;"></span>
+        <span style="--i:3;"></span>
+        <span style="--i:4;"></span>
+        <span style="--i:5;"></span>
+        <span style="--i:6;"></span>
+        <span style="--i:7;"></span>
+        <span style="--i:8;"></span>
+        <span style="--i:9;"></span>
+        <span style="--i:10;"></span>
+        <span style="--i:11;"></span>
+        <span style="--i:12;"></span>
+        <span style="--i:13;"></span>
+        <span style="--i:14;"></span>
+        <span style="--i:15;"></span>
+        <span style="--i:16;"></span>
+        <span style="--i:17;"></span>
+        <span style="--i:18;"></span>
+        <span style="--i:19;"></span>
+        <span style="--i:20;"></span>
+        <span style="--i:21;"></span>
+        <span style="--i:22;"></span>
+        <span style="--i:23;"></span>
+        <span style="--i:24;"></span>
+        <span style="--i:25;"></span>
+        <span style="--i:26;"></span>
+        <span style="--i:27;"></span>
+        <span style="--i:28;"></span>
+        <span style="--i:29;"></span>
+        <span style="--i:30;"></span>
+        <span style="--i:31;"></span>
+        <span style="--i:32;"></span>
+        <span style="--i:33;"></span>
+        <span style="--i:34;"></span>
+        <span style="--i:35;"></span>
+        <span style="--i:36;"></span>
+        <span style="--i:37;"></span>
+        <span style="--i:38;"></span>
+        <span style="--i:39;"></span>
+        <span style="--i:40;"></span>
+        <span style="--i:41;"></span>
+        <span style="--i:42;"></span>
+        <span style="--i:43;"></span>
+        <span style="--i:44;"></span>
+        <span style="--i:45;"></span>
+        <span style="--i:46;"></span>
+        <span style="--i:47;"></span>
+        <span style="--i:48;"></span>
+        <span style="--i:49;"></span>
+		<span style="--i:50;"></span>
+        <span style="--i:51;"></span>
+        <span style="--i:52;"></span>
+        <span style="--i:53;"></span>
+        <span style="--i:54;"></span>
+        <span style="--i:55;"></span>
+        <span style="--i:56;"></span>
+		<span style="--i:57;"></span>
+        <!-- Add more spans as needed -->
+    </div>
+    <script src="logscript.js"></script>
+</body>
+</html>

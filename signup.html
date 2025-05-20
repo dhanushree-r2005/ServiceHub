@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="css/signstyles.css">
+</head>
+<body>
+    <video autoplay muted loop id="backgroundVideo">
+        <source src="video/signup1.mp4" type="video/mp4">
+    </video>
+    <div class="wrapper">
+        <div class="form-wrapper sign-up">
+            <h2>Sign Up</h2>
+            <!-- Form that links to signup.php for processing -->
+            <form action="signup.php" method="post">
+                <div class="input-group">
+                    <input type="text" id="signup-username" name="username" required>
+                    <label for="signup-username">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="signup-email" name="email" required>
+                    <label for="signup-email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="signup-password" name="password" required>
+                    <label for="signup-password">Password</label>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="signup-mobile" name="mobile" required pattern="^\d{10}$" placeholder="Enter a 10-digit mobile number">
+                    <label for="signup-mobile">Mobile Number</label>
+                </div>
+                <div class="input-group">
+                    <select id="signup-role" name="role" required onchange="toggleFields()">
+                        <option value="">Select a role</option>
+                        <option value="user">User</option>
+                        <option value="worker">Worker</option>
+                    </select>
+                    <label for="signup-role">Role</label>
+                </div>
+                <div id="user-fields" class="hidden">
+                    <div class="input-group">
+                        <input type="text" id="user-address" name="address">
+                        <label for="user-address">Address</label>
+                    </div>
+                </div>
+                <div id="worker-fields" class="hidden">
+                    <div class="input-group">
+                        <select id="worker-service" name="service_id" required>
+                            <option value="">Select a service</option>
+                            <option value="1">Carpentry</option>
+                            <option value="2">Plumbing</option>
+                            <option value="3">Electrical Work</option>
+                            <option value="4">Painting</option>
+                            <option value="5">Moving Services</option>
+                        </select>
+                        <label for="worker-service">Service Provided</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" id="worker-experience" name="experience" min="0" required>
+                        <label for="worker-experience">Experience (in years)</label>
+                    </div>
+                </div>
+                <button type="submit">Sign Up</button><br><br>
+                <button>Already have an account? <a href="login.html" class="login-link">login now</a>.</button>
+            </form>
+        </div>
+    </div>
+    <script src="signscript.js"></script>
+</body>
+</html>
